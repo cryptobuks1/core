@@ -1,0 +1,19 @@
+BEGIN {dem1=0; tong1=0; dem2=0; tong2=0; dem3=0; tong3=0;}
+{
+if(($1=="r")&&($3=="0")&&($4=="3")&&($5="cbr"))
+	{
+	dem1= dem1+1
+	tong1= tong1+$6
+	}
+if(($1=="r")&&($3=="1")&&($4=="3")&&($5="tcp"))
+{
+	dem2= dem2+1
+	tong2= tong2+$6
+	}
+if(($1=="r")&&($3=="2")&&($4=="3")&&($5="tcp"))
+{
+	dem3= dem3+1
+	tong3= tong3+$6
+	}
+}
+END {print("thong luong TB 03 la:", tong1/dem1,"\n thong luong TB 13 la:", tong2/dem2,"\n thong luong TB la:", tong3/dem3)}

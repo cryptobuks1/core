@@ -1,0 +1,15 @@
+﻿bang chargings_telco them: provider
+bang charging sua: error_messsae thanh text
+
+bang: settings_module ==> them row: stopcharging | 1 | Charging
+
+==========
+array:2 [▼
+  "data" => "{"listCards":["VNP|100000|36120123010493|3608 00643 1049|00:00:00 14\/03\/2028"]}\x07\x07\x07\x07\x07\x07\x07"
+  "request_id" => "partnerTest_PHP_1537782636370"
+]
+
+array:2 [▼
+  "data" => "{"listCards":["VNP|100000|36120123010503|3608 00643 1050|00:00:00 14\/03\/2028","VNP|100000|36120123010513|3608 00643 1051|00:00:00 14\/03\/2028"]}\x05\x05\x05\ ▶"
+  "request_id" => "partnerTest_PHP_1537782728973"
+]

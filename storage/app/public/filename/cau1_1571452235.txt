@@ -1,0 +1,120 @@
+#tao 1 simulator
+set ns [new Simulator]
+#Mo 1 trace file
+set f [open anh.tr w]
+$ns trace-all $f
+# Mo nam trace file
+set nf [open anh.nam w]
+$ns namtrace-all $nf
+
+#
+proc finish {} {
+	global ns nf
+	$ns flush-trace
+
+	#Close the trace file
+		close $nf
+	#Execute nam on the trace file
+	exec nam anh.nam &
+	exit 0
+}
+
+#Tao 8 nut
+set n0 [$ns node]
+set n1 [$ns node]
+set n2 [$ns node]
+set n3 [$ns node]
+set n4 [$ns node]
+set n5 [$ns node]
+set n6 [$ns node]
+set n7 [$ns node]
+
+#Dinh nghia mau
+$ns color 0 Green;
+$ns color 1 Red;
+$ns color 2 Blue;
+
+#Taoo link giua cac nut
+$ns duplex-link $n0 $n3 1.5Mb 5ms DropTail
+$ns duplex-link $n1 $n3 1.5Mb 5ms DropTail
+$ns duplex-link $n2 $n3 1.5Mb 5ms DropTail
+$ns duplex-link $n3 $n4 2Mb 10ms DropTail
+$ns duplex-link $n4 $n5 1.5Mb 5ms DropTail
+$ns duplex-link $n4 $n6 1.5Mb 5ms DropTail
+$ns duplex-link $n4 $n7 1.5Mb 5ms DropTail
+#Siinh nghia kich thuoc hang doi cho lien ket giua n3 va n4
+$ns queue-limit $n3 $n4 15
+
+#Cach xac dinh bo tri cua cau truc lien ket
+$ns duplex-link-op $n0 $n3 orient down
+$ns duplex-link-op $n1 $n3 orient right
+$ns duplex-link-op $n2 $n3 orient up
+$ns duplex-link-op $n3 $n4 orient right
+$ns duplex-link-op $n4 $n5 orient up
+$ns duplex-link-op $n4 $n6 orient right
+$ns duplex-link-op $n4 $n7 orient down
+
+#giam sat haang doi cac lieen ket
+$ns duplex-link-op $n0 $n3 queuePos 0.5
+$ns duplex-link-op $n1 $n3 queuePos 0.5
+$ns duplex-link-op $n2 $n3 queuePos 0.5
+$ns duplex-link-op $n3 $n4 queuePos 0.5
+$ns duplex-link-op $n4 $n5 queuePos 0.5
+$ns duplex-link-op $n4 $n6 queuePos 0.5
+$ns duplex-link-op $n4 $n7 queuePos 0.5
+#tao 1 tac nhan TCP va dinh kem no vao nut n2
+set tcp2 [new Agent/TCP/Reno]
+$ns attach-agent $n2 $tcp2
+$tcp2 set window_ 8
+$tcp2 set fid_ 1
+
+#tao mot tac nhan TCP va dinh kem vao no vao nut n1
+set tcp1 [new Agent/TCP/Reno]
+$ns attach-agent $n1 $tcp1
+$tcp1 set window_ 8
+$tcp1 set fid_ 2
+
+#tao mot tac nhan UDP va dinh kem no vao nut n0
+set udp0 [new Agent/UDP]
+$udp0 set class_ 0
+$ns attach-agent $n0 $udp0
+#Tao 1 nguuon luu luong truy cap vao CBR va dinhh kem no vao udp0
+set cbr0 [new Application/Traffic/CBR]
+$cbr0 set packetSize_ 500
+$cbr0 attach-agent $udpubu
+#tao cac TCP sink agent va gan ket chungn toi nut n6,n7
+set sink1 [new Agent/TCPSink]
+set sink2 [new Agent/TCPSink]
+$ns attach-agent $n6 $sink1
+$ns attach-agent $n7 $sink2
+
+#Ket noi cac nguon luu luong voi cac sink giao thong
+$ns connect $tcp1 $sink1
+$ns connect $tcp2 $sink2
+#Tao moot agent Null(Mot sink giao thong) va dinh kem no vao nutt n5
+set null0 [new Agent/Null]
+$ns attach-agent $n5 $null0
+
+#ket noi cac luu luoong voi cac sink giao thong
+$ns connect $udp0 $null0
+
+#lich su kien cho cac CBR agent
+$ns at 5.0 "$cbr0 start"
+$ns at 9.5 "$cbr0 stop"
+#Tao ung dung FTP va gan ket chung vao cac agnet
+set ftp1 [new Application/FTP]
+$ftp1 attach-agent $tcp1
+set ftp2 [new Application/FTP]
+$ftp2 attach-agent $tcp2
+
+#Lich su kien cho cac FTP
+$ns at 0.1 "$ftp1 start"
+$ns at 0.3 "$ftp2 start"
+$ns at 5.0 "$ftp1 stop"
+$ns at 8.0 "$ftp2 stop"
+
+#goi thu tuc ket thuuc sau 10s cua thoi gian Silulation
+$ns at 10.0 "finish"
+
+#Chay
+$ns run

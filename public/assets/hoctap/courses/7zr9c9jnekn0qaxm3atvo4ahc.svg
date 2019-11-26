@@ -1,0 +1,14 @@
+<svg id="svg-source" width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <defs id="ui-icons">
+    <svg id="topic-icon" viewBox="0 0 24 24" width="24px" height="24px" style="enable-background:new 0 0 24 24;" x="0" y="0" preserveAspectRatio="xMinYMin meet" class="artdeco-icon">
+      <g class="large-icon" style="fill: #c7d1d8">
+        <path d="M4,3.67c0.73,0,1.33,0.6,1.33,1.33S4.73,6.33,4,6.33S2.67,5.73,2.67,5S3.27,3.67,4,3.67z M8,4h13v2H8V4z M4,10.67c0.73,0,1.33,0.6,1.33,1.33S4.73,13.33,4,13.33S2.67,12.73,2.67,12S3.27,10.67,4,10.67z M8,11h13v2H8V11z M4,17.67c0.73,0,1.33,0.6,1.33,1.33S4.73,20.33,4,20.33S2.67,19.73,2.67,19S3.27,17.67,4,17.67z M8,18h13v2H8V18z"></path>
+      </g>
+    </svg>
+  </defs>
+  <style>
+    #svg-source use[data-size="large"]{      fill-opacity: 1;      fill: transparent;    }    #svg-source use{      fill-opacity: 0;      fill: currentColor;    }  </style>
+
+  <use x="0" y="0" data-size="large" xlink:href="#topic-icon" style="color: rgba(0, 0, 0, 0.55);" width="24px" height="24px"/>
+
+</svg>

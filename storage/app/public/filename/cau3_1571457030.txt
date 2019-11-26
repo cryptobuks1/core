@@ -1,0 +1,21 @@
+TitleText: Thong luong ket noi
+BarGraph: true
+BarBase: 0.0
+BarWidth: 0.25
+NoLines: true
+YUnitText: thong luong
+XUnitText: vi tri
+"tcp1"
+1 1038.29 
+0 0
+0 0
+
+"tcp2"
+0 0
+2 1038.98
+0 0
+
+"CBR"
+0 0
+0 0
+3 500
