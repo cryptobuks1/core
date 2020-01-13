@@ -201,7 +201,7 @@ class ZtestFrontController extends FrontendController
             [
             'ReceiptNumber' => rand(1000000,9000000).'NC',  //// Mã order của mình
             'ServiceCode' => 'GATE10',
-            'Price' => 10000,
+            'Tourdetails' => 10000,
             'Amount' => 1,
             'RequestDate' => date('Y-m-d\TH:i:s').'+07:00'
         ]]];

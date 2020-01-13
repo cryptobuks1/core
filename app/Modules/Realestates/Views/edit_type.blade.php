@@ -36,8 +36,8 @@
                                         <div class="col-md-6">
                                             <label for="form_id">Hình thức:</label>
                                             <select name="form_id" id="" class="form-control">
-                                                <option value="0" @if($type->form_id==0) selected @endif>Nhà đất bán</option>
-                                                <option value="1" @if($type->form_id==1) selected @endif>Nhà đất cho thuê</option>
+                                                <option value="1" @if($type->form_id==1) selected @endif>Nhà đất bán</option>
+                                                <option value="2" @if($type->form_id==2) selected @endif>Nhà đất cho thuê</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">

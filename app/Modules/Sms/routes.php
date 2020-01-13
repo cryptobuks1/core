@@ -13,6 +13,15 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
     Route::post('sms/action', ['as'=>'sms.provider.action', 'uses'=>'SmsController@action']);
 
     Route::resource('/sms','SmsController');
+    Route::group(['prefix'=>'telco'],  function () {
+        Route::get('/',               ['as'=>'backend.telco.index', 'uses'=> 'SmsController@telco_index']);
+        Route::get('/create',         ['as'=>'backend.telco.create','uses'=> 'SmsController@telco_create']);
+        Route::post('/store',         ['as'=>'backend.telco.store', 'uses'=> 'SmsController@telco_store']);
+        Route::get('/edit/{id}',      ['as'=>'backend.telco.edit',  'uses'=> 'SmsController@telco_edit']);
+        Route::PATCH('/update/{id}',  ['as'=>'backend.telco.update','uses'=> 'SmsController@telco_update']);
+        Route::delete('/delete/{id}', ['as'=>'backend.telco.delete','uses'=> 'SmsController@telco_delete']);
+    });
+    Route::get('/getprice/{user_id}/{telco}/{currency_code}',['as'=>'backend.getprice', 'uses'=> 'SmsController@getPrice']);
 
 });
 
@@ -20,4 +29,5 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
 Route::group(['middleware' => ['web'], 'module'=>'Sms', 'namespace' => $namespace], function () {
     ///API dang ky
     Route::post('/api/Vmg/callback', 'SmsFrontController@dangkysms');
+    Route::get('/sms/list/order', ['as'=>'frontend.sms.order',  'uses'=> 'SmsFrontController@listOrderSms']);
 });

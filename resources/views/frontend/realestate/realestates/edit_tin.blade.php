@@ -520,7 +520,8 @@
         }
 
     </script>
-    <script>
+
+    <script >
         function changeImg(input){
             //Nếu như tồn thuộc tính file, đồng nghĩa người dùng đã chọn file mới
             if(input.files && input.files[0]){
@@ -538,8 +539,6 @@
                 $('#img').click();
             });
         });
-    </script>
-    <script >
         function previewImages() {
             var $preview = $('#preview').empty();
             if (this.files) $.each(this.files, readAndPreview);

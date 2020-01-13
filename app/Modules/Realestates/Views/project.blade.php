@@ -53,6 +53,7 @@
                             <div class="row table-responsive"><div class="col-sm-12">
                                     <table id="example1" class="table table-bordered table-striped dataTable">
                                         <thead>
+                                        <tr>
                                             <th>ID</th>
                                             <th>Tên dự án</th>
                                             <th>Image</th>

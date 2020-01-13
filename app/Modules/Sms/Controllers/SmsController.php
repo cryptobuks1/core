@@ -2,8 +2,12 @@
 
 namespace App\Modules\Sms\Controllers;
 
+use App\Modules\Currency\Models\Currencies;
+use App\Modules\Group\Models\Group;
+use App\Modules\Localisation\Models\Countries;
 use App\Modules\Sms\Models\Sms;
 use App\Modules\Sms\Models\SmsProvider;
+use App\Modules\Sms\Models\SmsTelco;
 use Illuminate\Http\Request;
 use App\Modules\Backend\Controllers\BackendController;
 use Illuminate\Database\Eloquent\Model;
@@ -242,5 +246,61 @@ class SmsController extends BackendController
         }
     }
 
+    //quản lý nhà mạng
+    public function telco_index(){
+        $groups = Group::where('status',1)->get();
+        $smss = SmsTelco::orderBy('name','ASC')->paginate(20);
+        return view('Sms::telco_index',compact('smss','groups'));
+    }
+    public function telco_create(){
+        $currencies = Currencies::where('fiat', 1)->where('status',1)->get();
+        $groups = Group::where('status',1)->get();
+        $countries = Countries::orderBy('name','ASC')->get();
+        return view('Sms::telco_create',compact('countries','groups','currencies'));
+    }
+    public function telco_store(Request $request){
+        $this->validate($request, [
+            'key'          => 'required|unique:sms_telco',
+            'status'       => 'required',
+            'country_code' => 'required',
+            'name'         => 'required',
+        ]);
+        $country = Countries::where('code',$request->country_code)->first();
+        $input = $request->all();
+        ( isset($input['status']) ) ? $input['status'] = 1 : $input['status'] = 2;
+        $input['dial_code'] = $country->dial_code;
+        $input['number_format'] = trim($request->number_format);
+        SmsTelco::create($input);
+        return redirect()->route('backend.telco.index')->with('success','Thêm thành công');
+    }
+    public function telco_edit($id){
+        $currencies = Currencies::where('fiat', 1)->where('status',1)->get();
+        $groups = Group::where('status',1)->get();
+        $countries = Countries::orderBy('name','ASC')->get();
+        $telco = SmsTelco::find($id);
+        return view('Sms::telco_edit',compact('telco','currencies','countries','groups'));
+    }
+    public function telco_update($id, Request $request){
+        $country = Countries::where('code',$request->country_code)->first();
+        $telco = SmsTelco::find($id);
+        $telco->name = $request->name;
+        $telco->country_code = $request->country_code;
+        $telco->dial_code = $country->dial_code;
+        $telco->key = $request->key;
+        $telco->price = $request->price;
+        $telco->number_format = trim($request->number_format);
+        $telco->description = $request->description;
+        if(isset($request->status)) {$telco->status = 1;} else {$telco->status = 2;}
+        $telco->save();
+        return redirect()->route('backend.telco.index')->with('success','Cập nhật thành công');
+    }
+    public function telco_delete($id){
+        SmsTelco::destroy($id);
+        return back()->with('success','Xóa thành công');
+    }
+    public function getPrice($user_id,$telco_id, $currency_code){
+        $price = SmsTelco::getPrice($user_id,$telco_id,$currency_code);
+        dd($price);
+    }
 
 }

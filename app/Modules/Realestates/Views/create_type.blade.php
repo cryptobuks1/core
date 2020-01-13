@@ -31,8 +31,8 @@
                                         <div class="col-md-6 form-group">
                                             <label for="form_id">Hình thức:</label>
                                             <select name="form_id" class="form-control">
-                                                <option value="0">Nhà đất bán</option>
-                                                <option value="1">Nhà đất cho thuê</option>
+                                                <option value="1">Nhà đất bán</option>
+                                                <option value="2">Nhà đất cho thuê</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 form-group">

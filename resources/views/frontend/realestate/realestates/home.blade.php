@@ -59,7 +59,6 @@
                         <div class="row">
                             <div class="item-tin-rao" style="padding: 5px 5px">
                                 <div class="col-md-4">
-
                                     <a href="{{asset('realestates/tin/'.$item->id.'/'.$item->slug)}}"><img style="width: 100%; height: 200px" src="@if(isset($item->image)){{asset('storage/avatar/'.$item->image)}} @endif" alt=""></a>
                                 </div>
                                 <div class="col-md-8">
@@ -90,7 +89,6 @@
                                     <div>
                                         <span style="float: right">{{$item->created_at}}</span>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -102,8 +100,6 @@
                     <span>Không có tin rao nổi bật nào.</span>
                 @endif
             </div>
-
-
         </div>
     </div>
 

@@ -172,6 +172,12 @@
                                 <p>Cấu hình SMS</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/sms/telco') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Quản lý nhà mạng</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -341,8 +347,7 @@
                         </li>
                     </ul>
                 </li>
-
-
+                @endrole
                 <li class="nav-item has-treeview">
                     <a href="#" id="users" class="nav-link">
                         <i class="nav-icon fa fa-cog"></i>
@@ -434,6 +439,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/broker/index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Môi Giới</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ url($backendUrl.'/search/index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
                                 <p>Search</p>
@@ -441,9 +452,6 @@
                         </li>
                     </ul>
                 </li>
-
-
-
                 <li class="nav-item has-treeview">
                     <a href="#" id="users" class="nav-link">
                         <i class="nav-icon fa fa-cog"></i>
@@ -464,10 +472,112 @@
                         </li>
                     </ul>
                 </li>
-                @endrole
+                <li class="nav-item has-treeview">
+                    <a href="#" id="users" class="nav-link">
+                        <i class="nav-icon fa fa-cog"></i>
+                        <p>Quản lý quỹ<i class="right fa fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/fund/index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Tài khoản quỹ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/fund/list-order') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Tạo phiếu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/fund/reason/index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Lý do</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" id="users" class="nav-link">
+                        <i class="nav-icon fa fa-cog"></i>
+                        <p>Tour du lịch<i class="right fa fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/tour/') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Tour</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/tour/type') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Loại tour</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/tour/service/') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Dịch vụ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/tour/place/') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Địa điểm du lịch</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" id="users" class="nav-link">
+                        <i class="nav-icon fa fa-cog"></i>
+                        <p>Khách sạn<i class="right fa fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/hotel/') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Hotel</p>
+                            </a>
+                        </li>
 
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" id="users" class="nav-link">
+                        <i class="nav-icon fa fa-cog"></i>
+                        <p>Đặt vé máy bay<i class="right fa fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/flight/') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Đặt vé</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/flight/airline') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Hãng bay</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/flight/station') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Sân bay</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url($backendUrl.'/flight/route') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Đường bay</p>
+                            </a>
+                        </li>
 
-
+                    </ul>
+                </li>
 
             </ul>
         </nav>

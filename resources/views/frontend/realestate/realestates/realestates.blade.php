@@ -121,9 +121,14 @@
                 <div class="card">
                     <div class="card-header" style="border-bottom: 0">
                         <h3 class="card-title" style="text-align: center; text-transform: uppercase; color: #0b6998">Danh sách tin rao</h3>
-                        <div class="float-right" style="margin-right: 150px">
+                        <div class="" >
                             <a href="{{ route('tin.create') }}"><button class="btn btn-success"><i class="fa fa-plus-circle"></i> Đăng tin rao</button></a>
                             <a href="{{route('tin.list.order')}}" class="btn btn-warning">List Order</a>
+                            @if($user->broker==0)
+                            <a href="{{route('broker.create')}}" class="btn btn-primary">Thêm môi giới</a>
+                            @else
+                            <a href="{{asset('realestates/broker/edit/'.$broker->id)}}" class="btn btn-primary">Thông tin môi giới</a>
+                            @endif
                         </div>
 
                         <div class="card-tools ">

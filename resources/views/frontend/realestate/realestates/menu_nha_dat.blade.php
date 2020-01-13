@@ -86,6 +86,7 @@
                                     <button type="submit" name="submit" value="filter" class="btn btn-warning"><i class="fa fa-search"></i>Search</button><br>
                                 </div>
                             </div>
+                            @csrf
                         </form>
                     </div>
                 </div>

@@ -487,20 +487,21 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-            $(document).ready(function() {
-                $("#cities").on('change', (function(e){
-                    var city_code = $(this).val();
-                    console.log(city_code);
-                    $.ajax({
-                        type:'POST',
-                        url:'{{ route('ajax.cities') }}',
-                        data:{code:city_code},
-                        success:function(data){
-                            $('#provinces').html(data);
-                        }
-                    });
-                }));
-            });
+
+        $(document).ready(function() {
+            $("#cities").on('change', (function(e){
+                var city_code = $(this).val();
+                console.log(city_code);
+                $.ajax({
+                    type:'POST',
+                    url:'{{ route('ajax.cities') }}',
+                    data:{code:city_code},
+                    success:function(data){
+                        $('#provinces').html(data);
+                    }
+                });
+            }));
+        });
 
         $(document).ready(function() {
             $("#provinces").on('change', (function(e){
@@ -510,7 +511,6 @@
                     url:'{{ route('ajax.province') }}',
                     data:{code:province_code},
                     success:function(data){
-                        $('#project').html(data);
                     }
                 });
             }));
@@ -531,9 +531,6 @@
         });
 
         $(document).ready(function() {
-
-        });
-        $(document).ready(function() {
             $("#vip").on('change', (function (e) {
                 var vip = $('#vip').val();
                 $.ajax({
@@ -542,7 +539,6 @@
                     data: { vip: vip},
                     success: function (data) {
                         $('#end').html(data);
-
                     }
                 });
             }));
@@ -550,6 +546,9 @@
                 $("#vip").val("7");
             });
         });
+
+    </script>
+    <script >
         function changeImg(input){
             //Nếu như tồn thuộc tính file, đồng nghĩa người dùng đã chọn file mới
             if(input.files && input.files[0]){
@@ -568,8 +567,6 @@
             });
 
         });
-    </script>
-    <script >
         function previewImages() {
             var $preview = $('#preview').empty();
             if (this.files) $.each(this.files, readAndPreview);

@@ -301,7 +301,7 @@
                                             <div class="row">
                                                 <div class="col-md-2"><label for="">Diện tích</label></div>
                                                 <div class="col-md-8 form-group" style="display:flex">
-                                                    <input type="text" style="width: 70%" name="acreage" class="form-control" value="{{number_format($data->acreage,0)}}"> <span style="padding-top: 10px;padding-left: 5px"> mét vuông</span>
+                                                    <input type="text" style="width: 70%" name="acreage" class="form-control" value="{{$data->acreage}}"> <span style="padding-top: 10px;padding-left: 5px"> mét vuông</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -660,10 +660,7 @@
             <!-- /.card -->
         </div>
         <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        </div>
-        <!-- /.row -->
+
     </section>
     <script type="text/javascript">
         $(document).ready(function(){

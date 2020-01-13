@@ -2,7 +2,9 @@
 
 namespace App\Modules\Sms\Controllers;
 
+use App\Modules\Order\Models\Order;
 use App\Modules\Sms\Models\Sms;
+use App\Modules\Sms\Models\SmsTelco;
 use App\Modules\Wallet\Controllers\WalletController;
 use Illuminate\Http\Request;
 use App\Modules\Frontend\Controllers\FrontendController;
@@ -42,7 +44,7 @@ class SmsFrontController extends FrontendController
 
                     $user_phone = '0'.substr($mo['User_ID'], 2);
 
-                        $sms = Sms::where('phone', $user_phone)->where('type', 'Odp')->where('created_at','<=', Carbon::now())->where('expired_at','>=', Carbon::now())->first();
+                        $sms = Sms::where('phone', $user_phone)->where('type', 'Odp')->where('expired_at', Carbon::tomorrow())->orderBy('id', 'desc')->first();
 
                         if($sms){
                             $mt_message = "Ma ODP cua ban la: ". $sms->secret;
@@ -83,7 +85,7 @@ class SmsFrontController extends FrontendController
                         $new_pass = rand(100000,999999);
                         $mt_message = "Mat khau cap 2 moi cua ban la: ". $new_pass;
 
-                        $user->mkc2 = md5($new_pass);
+                        $user->mkc2 = sha1($new_pass);
                         $user->update();
 
                         /// Gọi lệnh gửi sms
@@ -231,6 +233,22 @@ class SmsFrontController extends FrontendController
             return true;
         else
             return false;
+    }
+    public function listOrderSms(Request $request){
+        $telcos = SmsTelco::where('status',1)->get();
+        $users  = User::all();
+        $datas = new Order();
+        $datas = $datas->where('module','Sms');
+        if ($request->has('fromdate') && $request->has('todate') && $request->fromdate !== null && $request->todate !== null) {
+            if (Carbon::parse($request->fromdate)->gt(Carbon::parse($request->todate))) {
+                return redirect()->back()->withErrors(['error' => 'Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc']);
+            }
+            $fromdate = Carbon::parse($request->fromdate)->startOfDay();
+            $todate = Carbon::parse($request->todate)->endOfDay();
+            $datas = $datas->whereBetween('created_at', [$fromdate, $todate]);
+        }
+        $datas = $datas->orderBy('id','ASC')->paginate(20);
+        return theme_view('pages.list_order_sms',compact('datas','users','telcos'));
     }
 
 

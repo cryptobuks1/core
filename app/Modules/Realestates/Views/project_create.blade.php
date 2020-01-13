@@ -188,10 +188,7 @@
             <!-- /.card -->
         </div>
         <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        </div>
-        <!-- /.row -->
+
     </section>
     <!-- /.content -->
 

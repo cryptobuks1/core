@@ -51,7 +51,7 @@
                                         @foreach($types as $type)
                                             <tr>
                                                 <td>{{$type->id}}</td>
-                                                <td>@if($type->form_id==0)Nhà đất bán @else Nhà đất cho thuê@endif</td>
+                                                <td>@if($type->form_id==1)Nhà đất bán @else Nhà đất cho thuê@endif</td>
                                                 <td >{{$type->name}}</td>
                                                 <td style="text-align: center">
                                                     <div data-table="realestates_type" data-id="{{ $type->id }}" data-col="status" class="Switch Round @if($type->status == 1) On @else Off @endif " style="vertical-align:top;margin-left:10px;">

@@ -40,7 +40,7 @@
                                         <th>Trạng thái</th>
                                         <th>Nổi bật</th>
                                         <th>Action</th>
-                                        </tr>
+
                                         </thead>
                                         <tbody>
                                         @if(!count($data))

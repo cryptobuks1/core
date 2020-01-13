@@ -99,8 +99,7 @@
                                             <label for="group">Nhóm dự án:</label>
                                             <select name="group[]" id="group" class="form-control" multiple required>
                                                 @foreach($group as $g_item)
-                                                    <option value="{{$g_item->code}}"
-                                                            @if(in_array($g_item->code, $data->group2)) selected @endif> {{$g_item->name}}</option>
+                                                    <option value="{{$g_item->code}}" @if(in_array($g_item->code, $data->group2)) selected @endif> {{$g_item->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -208,7 +207,6 @@
                                 </div>
                             </div>
                     @csrf
-
                  {!! Form::close() !!}
                     </div>
                     <!-- /.card -->
@@ -218,10 +216,6 @@
             <!-- /.card -->
         </div>
         <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        </div>
-        <!-- /.row -->
     </section>
     <!-- /.content -->
 

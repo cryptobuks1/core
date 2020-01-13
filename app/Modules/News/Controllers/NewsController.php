@@ -6,7 +6,6 @@ use App\Helpers\SlugHelper;
 use App\Modules\Language\Models\Language;
 use App\Modules\Seo\Models\Seo;
 use Illuminate\Http\Request;
-
 use App\Modules\Backend\Controllers\BackendController;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
@@ -63,7 +62,6 @@ class NewsController extends BackendController
             }
             $title .= $keyword;
         }
-
         return view("News::index", compact('title','news'));
 	}
 

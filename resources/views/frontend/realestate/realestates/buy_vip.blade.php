@@ -111,7 +111,6 @@
 
 
 @section('js-footer')
-    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <script >
         $.ajaxSetup({
             headers: {

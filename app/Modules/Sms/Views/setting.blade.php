@@ -1,17 +1,9 @@
 @extends('master')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('js')
-    <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
-    <!-- SlimScroll -->
-    <script src="{{ asset('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('adminlte/plugins/fastclick/fastclick.js') }}"></script>
 
 @endsection
 
@@ -54,7 +46,7 @@
                                                 <td>{{$listin->provider}}</td>
                                                 <td>{{$listin->balance}}</td>
                                                 <td>
-                                                    <div data-table="stockcards_setting" data-id="{{ $listin->id }}" data-col="status" class="Switch Round @if($listin->status == 1) On @else Off @endif " style="vertical-align:top;margin-left:10px;">
+                                                    <div data-table="sms_provider" data-id="{{ $listin->id }}" data-col="status" class="Switch Round @if($listin->status == 1) On @else Off @endif " style="vertical-align:top;margin-left:10px;">
                                                         <div class="Toggle" ></div>
                                                     </div>
 

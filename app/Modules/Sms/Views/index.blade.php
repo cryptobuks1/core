@@ -1,17 +1,9 @@
 @extends('master')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('js')
-<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('adminlte/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
-<!-- SlimScroll -->
-<script src="{{ asset('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ asset('adminlte/plugins/fastclick/fastclick.js') }}"></script>
 
 @endsection
 

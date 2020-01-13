@@ -20,8 +20,6 @@ use Schema;
 
 class SeoController extends BackendController
 {
-
-
     public function index(Request $request)
     {
         $title    = "Seo Onpage";
@@ -41,7 +39,6 @@ class SeoController extends BackendController
         if( auth()->user()->hasRole('SUPER_ADMIN|ADMIN') )
         {
             $title    = "Tạo Seo link";
-
             $langs = Language::where('status', 1)->orderBy('default', 'DESC')->get();
 
             return view('Seo::create',compact('title', 'langs'));
@@ -58,16 +55,11 @@ class SeoController extends BackendController
             'title' => 'required',
             'description' => 'required'
         ]);
-
         $input = $request->all();
-
-
-
         $link = $request->link;
         if(!starts_with($link, 'http')){
             return back()->withErrors(['error' => 'Đường dẫn phải bắt đầu bằng http']);
         }
-
         $url = url('/');
         $input['link'] = str_replace($url, '', $link);
         $input['checksum'] = md5($input['link']);
@@ -84,7 +76,6 @@ class SeoController extends BackendController
     {
         if( auth()->user()->hasRole('SUPER_ADMIN|ADMIN') )
         {
-
             $title    = "Sửa Seo meta";
             $langs = Language::where('status', 1)->orderBy('default', 'DESC')->get();
             $seo  = Seo::find($id);
@@ -114,7 +105,6 @@ class SeoController extends BackendController
         $seo->language = $request->language;
         $seo->h1 = $request->h1;
         $seo->noindex = $request->noindex;
-
         $seo->save();
         return redirect()->route('seo.index')
             ->with('success','Cập nhật thành công');
@@ -132,7 +122,4 @@ class SeoController extends BackendController
                 ->withErrors(['message' =>'Not access.']);
         }
     }
-
-
-
 }
