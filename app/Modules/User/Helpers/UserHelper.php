@@ -1,151 +1,232 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-bZkZfRKp4IXM59MFL0JAN+wIlrVX4Xy=
+<?php
+namespace App\Modules\User\Helpers;
+
+use App\Modules\Sendmail\Controllers\SendmailController;
+use App\Modules\Wallet\Controllers\WalletController;
+use Illuminate\Support\Facades\Hash;
+use App\Modules\Wallet\Models\Wallet;
+use App\Modules\User\Models\User as UserModel;
+use Illuminate\Support\Str;
+use DB;
+use Log;
+use Auth;
+use Cookie;
+
+class UserHelper {
+  public static function createUser($userdata,$parent) {
+    DB::beginTransaction();
+    try {
+
+//      $user = new UserModel;
+//      $user->username = $userdata['username'];
+//      $user->name = $userdata['name'];
+//      $user->email = $userdata['email'];
+//      $user->phone = $userdata['phone'];
+//      $user->password = $userdata['password'];
+//      $user->group = $userdata['group'];
+//      $user->country_code = $userdata['country_code'];
+//      $user->parent_id = $userdata['parent_id'];
+//      $user->ip = $userdata['ip'];
+//      $user->ref = $userdata['ref'];
+//      $user->status = $userdata['status'];
+//      $user->save();
+        $input['name'] = $userdata['name'];
+        $input['email'] = $userdata['email'];
+        $input['username'] = $userdata['username'];
+        $input['phone'] = $userdata['phone'];
+        $input['password'] = $userdata['password'];
+        $input['group'] = $userdata['group'];
+        $input['country_code'] = $userdata['country_code'];
+        $input['ref'] = $userdata['ref'];
+        $input['ip'] = $userdata['ip'];
+        $input['status'] = $userdata['status'];
+        $user = UserModel::create($input,$parent);
+        $nodes = UserModel::all();
+        $count = [];
+        foreach ($nodes as $node){
+            array_push($count,count($node->ancestors));
+        }
+        if((max($count) + 1) > 5){
+            UserModel::destroy($user->id);
+        }
+      /// Tạo role USER
+      DB::table('model_has_roles')->insert(
+              ['role_id' => 5, 'model_type' => 'App\User', 'model_id' => $user->id]
+      );
+      /// Tạo ví
+      WalletController::makeWalletFromUserId($user->id);
+      DB::commit();
+      return $user;
+
+    } catch (\Exception $e) {
+      DB::rollback();
+      return false;
+    }
+
+  }
+
+
+  public static function user_login($data = array()) {
+    if (!isset($data['username']) || !isset($data['password'])) {
+      return null;
+    }
+    if (filter_var($data['username'], FILTER_VALIDATE_EMAIL)) {
+      $login = 'email';
+      $temp_user = UserModel::where('email', $data['username'])->where('status', 1)->first();
+
+    } else {
+      $temp_user = UserModel::where('phone', $data['username'])->where('status', 1)->first();
+      if (is_numeric($data['username']) && $temp_user) {
+        $login = 'phone';
+
+      } else {
+        $temp_user = UserModel::where('username', $data['username'])->where('status', 1)->first();
+        $login = 'username';
+      }
+    }
+    if (!$temp_user) {
+      return null;
+    }
+    $remember = ($data['remember']) ? true : false;
+    ///Thông tin gửi lên
+    $user_login[$login] = $data['username'];
+    $user_login['password'] = $data['password'];
+    if (Auth::attempt($user_login, $remember)) {
+      /// Ghi log
+      $input = array();
+      $input['user_id'] = auth()->user()->id;
+      $input['phone'] = (auth()->user()->phone) ? auth()->user()->phone : null;
+      $input['email'] = (auth()->user()->email) ? auth()->user()->email : null;
+      $input['ip'] = getIpClient();
+      $input['twofactor'] = null;
+      $input['user_agent'] = request()->server('HTTP_USER_AGENT');
+      $input['created_at'] = now();
+      $input['updated_at'] = now();
+      DB::table('auth_logs')->insert($input);
+      if (Auth::check()) {
+        $logged_user = UserModel::find(Auth::user()->id);
+        if (Auth::user()->hasRole('BACKEND')) {
+          $logged_user->api_token = null;
+          $logged_user->api_token_created = null;
+          $logged_user->update();
+          Auth::logout();
+          return null;
+        } else {
+          $token = Str::random(60) . Auth::user()->id;
+          $logged_user->api_token = hash('sha256', $token);
+          $logged_user->api_token_created = now();
+          $logged_user->update();
+          return $logged_user;
+        }
+
+      }
+
+    } else {
+      return null;
+    }
+
+  }
+
+  ///Hàm này viết sau, dùng để xóa token hết hạn
+  public static function autoRemoveToken() {
+
+  }
+
+  ///Trả về các trường có thể update dữ liệu
+  public static function UserUpdateCheck() {
+    if (Auth::check()) {
+      $user = UserModel::find(Auth::user()->id);
+      $response = [];
+      $response['gender'] = ['title' => 'Giới tính', 'key' => 'gender'];
+      $response['birthday'] = ['title' => 'Ngày sinh', 'key' => 'birthday'];
+      $response['country_code'] = ['title' => 'Quốc gia', 'key' => 'country_code'];
+      $response['mkc2'] = ['title' => 'Mật khẩu cấp 2', 'key' => 'mkc2'];
+
+      if ($user->username == null) {
+        $response['username'] = ['title' => 'Tên đăng nhập', 'key' => 'username'];
+      }
+      if ($user->name == null) {
+        $response['name'] = ['title' => 'Họ và tên', 'key' => 'name'];
+      }
+      if ($user->phone == null) {
+        $response['phone'] = ['title' => 'Số điện thoại', 'key' => 'phone'];
+      }
+      if ($user->email == null) {
+        $response['email'] = ['title' => 'Email', 'key' => 'email'];
+      }
+      return $response;
+    }
+  }
+
+
+  public static function getName($username) {
+    $info = UserModel::where('username', $username)->first();
+    if ($info) {
+      return $info->name;
+    } else {
+      return null;
+    }
+
+  }
+
+  ///Hàm để chống trùng thông tin user, ví dụ sđt của người A không thể là username của người B. Chống chuyển nhầm tiền
+  public static function checkDuplicateInfo($user_nick) {
+    ///Check username
+    $info_username = UserModel::where('username', $user_nick)->get();
+    ///Check email
+    $info_email = UserModel::where('email', $user_nick)->get();
+    ///Check phone
+    $info_phone = UserModel::where('phone', $user_nick)->get();
+    if (count($info_username) > 0 || count($info_email) > 0 || count($info_phone) > 0) {
+      return null;
+    } else {
+      return 'available';
+    }
+  }
+
+  ///Xác định thông tin là username, email hay phone
+  public static function defineUserInfo($input) {
+    $info = null;
+    if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+      $info = 'email';
+    } else {
+      if (is_numeric($input) && substr($input, 0, 1) == '0' && strlen($input) > 9) {
+        $info = 'phone';
+      } else {
+        $info = 'username';
+      }
+    }
+    if ($info) {
+      $temp_user = UserModel::where($info, $input)->where('status', 1)->select('id', 'name', 'username', 'email', 'phone', 'group')->first();
+      if ($temp_user) {
+        return $temp_user;
+      } else {
+        return null;
+      }
+
+    } else {
+      return null;
+    }
+
+  }
+
+
+  public static function defineUserLoginMethod($input) {
+    $info = null;
+    if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+      $info = 'email';
+    } else {
+      if (is_numeric($input) && substr($input, 0, 1) == '0' && strlen($input) > 9) {
+        $info = 'phone';
+      } else {
+        $info = 'username';
+      }
+    }
+    if ($info) {
+      return $info;
+    } else {
+      return null;
+    }
+  }
+
+}

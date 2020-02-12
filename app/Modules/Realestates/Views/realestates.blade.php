@@ -91,7 +91,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="card-body" style="padding-top: 50px;">
                             <div class="col-sm-12">
-                                <table id="example1" class="table table-bordered table-striped dataTable" >
+                                <table id="example1" class="table table-bordered table-striped dataTable table-responsive" >
                                     <thead>
                                     <tr>
                                         <th>ID</th>

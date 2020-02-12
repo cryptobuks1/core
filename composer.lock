@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "045cde63c25ce46c8c98785191f73ba1",
+    "content-hash": "1f7b7b2985faec19fd7795cd8558adac",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2669,6 +2669,96 @@
             "time": "2019-07-08T21:21:25+00:00"
         },
         {
+            "name": "phpro/soap-client",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpro/soap-client.git",
+                "reference": "46e2b176eeb8e9e830168224bb0f94aafbc64f2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpro/soap-client/zipball/46e2b176eeb8e9e830168224bb0f94aafbc64f2b",
+                "reference": "46e2b176eeb8e9e830168224bb0f94aafbc64f2b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-xml": "*",
+                "php": "^7.2",
+                "psr/event-dispatcher": "^1.0",
+                "psr/log": "^1.0",
+                "symfony/console": "~3.4|~4.0|~5.0",
+                "symfony/event-dispatcher": "~3.4|~4.0|~5.0",
+                "symfony/filesystem": "~3.4|~4.0|~5.0",
+                "symfony/options-resolver": "~3.4|~4.0|~5.0"
+            },
+            "require-dev": {
+                "ext-soap": "*",
+                "guzzlehttp/guzzle": "^6.4.1",
+                "guzzlehttp/promises": "^1.3.1",
+                "guzzlehttp/psr7": "^1.6.1",
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "php-http/client-common": "^1.10",
+                "php-http/discovery": "^1.7",
+                "php-http/guzzle6-adapter": "^1.1.1",
+                "php-http/httplug": "^1.1",
+                "php-http/message": "^1.8",
+                "php-http/message-factory": "^1.0",
+                "php-http/mock-client": "^1.3",
+                "php-vcr/php-vcr": "~1.4.4",
+                "phpro/grumphp": "~0.17.1",
+                "phpspec/phpspec": "~6.1",
+                "phpstan/phpstan": "^0.11.19",
+                "phpunit/phpunit": "~8.5",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0.1",
+                "robrichards/wse-php": "^2.0.3",
+                "robrichards/xmlseclibs": "^3.0",
+                "squizlabs/php_codesniffer": "~2.9",
+                "symfony/validator": "~3.4|~4.0|~5.0",
+                "zendframework/zend-code": "^3.4.0"
+            },
+            "suggest": {
+                "ext-soap": "If you want to use PHP's ext-soap driver.",
+                "php-http/client-common": "For gaining control over the HTTP layer",
+                "php-http/client-implementation": "For gaining control over the HTTP layer",
+                "php-http/discovery": "For gaining control over the HTTP layer",
+                "php-http/httplug": "For gaining control over the HTTP layer",
+                "php-http/message": "For gaining control over the HTTP layer",
+                "php-http/message-factory": "For gaining control over the HTTP layer",
+                "phpro/annotated-cache": "For caching SOAP responses",
+                "psr/http-message": "For gaining control over the HTTP layer",
+                "psr/log-implementation": "For logging SOAP requests, responses and errors",
+                "robrichards/wse-php": "If you want to use the WSA or WSSE middleware",
+                "symfony/validator": "If you easily want to validate SOAP requests / responses manually"
+            },
+            "bin": [
+                "bin/soap-client"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phpro\\SoapClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Toon Verwerft",
+                    "email": "toon.verwerft@phpro.be"
+                }
+            ],
+            "description": "A general purpose SoapClient library",
+            "keywords": [
+                "soap"
+            ],
+            "time": "2020-01-09T13:58:38+00:00"
+        },
+        {
             "name": "pimple/pimple",
             "version": "v3.2.3",
             "source": {
@@ -2866,6 +2956,52 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "psr/event-dispatcher",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/event-dispatcher.git",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "reference": "dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\EventDispatcher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Standard interfaces for event handling.",
+            "keywords": [
+                "events",
+                "psr",
+                "psr-14"
+            ],
+            "time": "2019-01-08T18:20:26+00:00"
         },
         {
             "name": "psr/http-message",
@@ -3807,6 +3943,56 @@
             "time": "2019-06-20T06:46:26+00:00"
         },
         {
+            "name": "symfony/filesystem",
+            "version": "v5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "1d71f670bc5a07b9ccc97dc44f932177a322d4e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/1d71f670bc5a07b9ccc97dc44f932177a322d4e6",
+                "reference": "1d71f670bc5a07b9ccc97dc44f932177a322d4e6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-11-26T23:25:11+00:00"
+        },
+        {
             "name": "symfony/finder",
             "version": "v4.3.3",
             "source": {
@@ -4060,6 +4246,60 @@
                 "mime-type"
             ],
             "time": "2019-07-19T16:21:19+00:00"
+        },
+        {
+            "name": "symfony/options-resolver",
+            "version": "v5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "1ad3d0ffc00cc1990e5c9c7bb6b81578ec3f5f68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/1ad3d0ffc00cc1990e5c9c7bb6b81578ec3f5f68",
+                "reference": "1ad3d0ffc00cc1990e5c9c7bb6b81578ec3f5f68",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony OptionsResolver Component",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
+            ],
+            "time": "2019-11-18T17:27:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

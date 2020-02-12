@@ -35,7 +35,7 @@ Route::group(['middleware' => ['web'], 'module'=>'User', 'namespace' => $namespa
 
     Route::get('account/profile', ['as'=>'user.profile', 'uses'=>'UserFrontController@profile'])->middleware('auth');
     Route::get('account/change-password', 'UserFrontController@changePassword')->name('frontend.account.changepassword')->middleware('auth');
-    Route::post('/change-password', 'UserFrontController@postPassword')->middleware('auth');
+    Route::post('/change-password', 'UserFrontController@postPassword')->name('frontend.account.postchangepassword')->middleware('auth');
     Route::get('account/profile/edit', ['as'=>'edit.profile', 'uses'=>'UserFrontController@editprofile'])->middleware('auth');
     Route::post('account/profile/edit', ['as'=>'edit.profile', 'uses'=>'UserFrontController@posteditprofile'])->middleware('auth');
 

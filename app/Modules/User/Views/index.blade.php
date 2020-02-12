@@ -64,6 +64,10 @@
                                                     @if(app("request")->input("status")=="status1") selected="selected" @endif>
                                                 Trạng thái mở
                                             </option>
+                                            <option value="verifydoc"
+                                                    @if(app("request")->input("status")=="verifydoc") selected="selected" @endif>
+                                                Chờ xác thực
+                                            </option>
                                         </select>
                                         <select name="type" class="form-control" style="">
                                             <option value="">-- Loại tìm kiếm --</option>
@@ -135,7 +139,9 @@
                                                         <span class="lbl"></span> </label>
                                                 </td>
                                                 <td>{{ $user->id }}</td>
-                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->name }}@if($user->verify_document == 1) <i class="ace-icon fa fa-check-circle text-success"></i> @endif<br/>
+                                                @if($user->verify_document == 2) <label class="badge badge-warning">Chờ xác thực</label> @endif
+                                                </td>
                                                 <td>@if($user->username) <i class="ace-icon fa fa-user bigger-130"></i> <strong>{{ $user->username }}</strong> <br>@endif
                                                     @if($user->email) <i class="ace-icon fa fa-envelope bigger-130"></i> <strong class="text-dark">{{ $user->email }}</strong> <span class="text-success">@if($user->verify_email == 1)<i class="ace-icon fa fa-check-circle"></i></span> @endif <br> @endif
                                                     @if($user->phone) <i class="ace-icon fa fa-phone bigger-130"></i> <strong class="text-info">{{ $user->phone }}</strong>  <span class="text-success">@if($user->verify_email == 1)<i class="ace-icon fa fa-check-circle"></i></span> @endif @endif
@@ -143,7 +149,7 @@
                                                 <td>
                                                     @if(count($user->wallets)> 0)
                                                         @foreach($user->wallets as $wallet)
-                                                            <span class="text-danger" style="display:block"><i class="ace-icon fa fa-money"></i> {{ number_format($wallet->balance_decode) }} {{ $wallet->currency_code }}</span><br>
+                                                            Ví: {{$wallet->number}} <span @if($wallet->balance_decode > 0) class="text-success" @else class="text-dark" @endif style="display:block"><strong>{{ number_format($wallet->balance_decode) }} {{ $wallet->currency_code }}</strong></span><br>
                                                         @endforeach
                                                     @endif
                                                 </td>

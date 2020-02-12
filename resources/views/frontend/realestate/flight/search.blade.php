@@ -10,6 +10,10 @@
         #preview img {
             padding: 10px;
         }
+        .form-control{
+            padding: 0;
+            border-radius: 3px;
+        }
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -29,80 +33,69 @@
             <div class="content-wap">
                 @include('layouts.errors')
                 {!! Form::open(array('route' => 'front.flight.list','method'=>'POST','enctype' => 'multipart/form-data')) !!}
-                <div class="card-body row">
-
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label id="lb-fund1" style="display: block">Điểm khởi hành(<span class="red">*</span>):</label>
-                                    <select id="departure" class="form-control select2 inv_id" name="StartPoint" required>
-                                        <option value="" >Nhập điểm khởi hành</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label>Thời gian khởi hành(<span class="red">*</span>):</label>
-                                    <input type="text" class="form-control"  placeholder="Chọn thời gian khởi hành" id="departure_time" name="DepartDate" value="{{  trim(date('d-m-Y', time()))}}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label id="lb-fund1" style="display: block">Điểm đến(<span class="red">*</span>):</label>
-                                    <select id="arrival" class="form-control select2 inv_id" name="EndPoint" required>
-                                        <option value="">Điểm đến</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label >Ngày về:</label>
-                                    <input type="text" class="form-control" placeholder="Chọn thời gian đáp cánh" id="arrival_time" name="DepartDate2" value="{{old('DepartDate2')}}">
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label id="lb-fund1" style="display: block">Chọn hãng hàng không:</label>
-                                    <select id="airline" class="form-control select2 inv_id" name="Airline">
-                                        <option value="" >Chọn hãng hàng không</option>
-                                    </select>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label id="lb-fund1" style="display: block">Điểm khởi hành(<span class="red">*</span>):</label>
+                                <select id="departure" class="form-control select2 inv_id" name="StartPoint" required>
+                                    <option value="" >Điểm khởi hành</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Ngày khởi hành(<span class="red">*</span>):</label>
+                                <input type="text" class="form-control"  placeholder="Chọn ngày khởi hành" id="departure_time" name="DepartDate" value="{{  trim(date('d/m/Y', time()))}}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label id="lb-fund1" style="display: block">Điểm đến(<span class="red">*</span>):</label>
+                                <select id="arrival" class="form-control select2 inv_id" name="EndPoint" required>
+                                    <option value="">Điểm đến</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label >Ngày về:</label>
+                                <input type="text" class="form-control" placeholder="Chọn ngày về" id="arrival_time" name="DepartDate2" value="{{old('DepartDate2')}}">
+                            </div>
+                        </div>
+                    </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-5">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label id="lb-fund1" style="display: block">Chọn hãng hàng không:</label>--}}
+                                {{--<select id="airline" class="form-control select2 inv_id" name="Airline">--}}
+                                    {{--<option value="" >Chọn hãng hàng không</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                         <hr>
-                    </div>
-                    {{--                    <div class="col-md-12">--}}
-                    {{--                        <div class="col-md-6">--}}
-                    {{--                            <div class="form-group">--}}
-                    {{--                                <label>Loại tiền</label>--}}
-                    {{--                                <select name="currency_id" id="" class="form-control">--}}
-                    {{--                                    @foreach($currencies as $currency)--}}
-                    {{--                                        <option value="{{$currency->id}}">{{$currency->code}}</option>--}}
-                    {{--                                    @endforeach--}}
-                    {{--                                </select>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Người lớn trên 12 tuổi</label>
-                            <input type="number" name="Adt" value="1" max="10" min="1" class="form-control" >
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Người lớn trên 12 tuổi</label>
+                                <input type="number" name="Adt" value="1" max="10" min="1" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Từ 2 đến dưới 20 tuổi</label>
+                                <input type="number" name="Chd" value="0" max="10" min="0" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Dưới 2 tuổi</label>
+                                <input type="number" name="Inf" value="0" max="10" min="0" class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Từ 2 đến dưới 20 tuổi</label>
-                            <input type="number" name="Chd" value="0" max="10" min="0" class="form-control" >
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Dưới 2 tuổi</label>
-                            <input type="number" name="Inf" value="0" max="10" min="0" class="form-control">
-                        </div>
-                    </div>
-                </div>
 
                 <!-- /.card-body -->
                 <div class="col-md-12">
@@ -213,10 +206,18 @@
     </script>
     <script>
         $(function () {
-            $("#departure_time, #arrival_time").datepicker({
-                dateFormat: 'dd-mm-yy',
+            $("#departure_time").datepicker({
+                dateFormat: 'dd/mm/yy',
                 minDate:'0D',
             });
         });
+        $("#departure_time").on('change', (function(e) {
+            var departure = $('#departure_time').val();
+            console.log(departure);
+            $("#arrival_time").datepicker({
+                dateFormat: 'dd/mm/yy',
+                minDate: departure,
+            });
+        }));
     </script>
 @endsection

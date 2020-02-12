@@ -12,7 +12,7 @@ Route::group(['middleware' =>['web'] , 'module'=>'Frontend', 'namespace' => $nam
 
 Route::group(['middleware' => $middleware, 'module'=>'Frontend', 'namespace' => $namespace], function () {
 
-    Route::get('/', ['as' =>'home', 'uses' =>'FrontendController@index']);
+//    Route::get('/', ['as' =>'home', 'uses' =>'FrontendController@index']);
     Route::get('/change-currency', ['as' =>'home.change.currency', 'uses' =>'FrontendController@postSetSiteCurrency']);
 
     /* change site's language */

@@ -542,7 +542,7 @@ class ProductFrontController extends FrontendController
                     $datau['parent_id'] = 1;
                     $datau['ref'] = uniqid();
 
-                    $user = \App\Modules\User\Helpers\UserHelper::createUser($datau);
+                    $user = \App\Modules\User\Helpers\FlightHelper::createUser($datau);
 
                     if($user){
 

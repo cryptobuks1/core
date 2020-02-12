@@ -11,155 +11,172 @@ use App\Modules\Flights\Models\FlightRoutes;
 use App\Modules\Flights\Models\Flights;
 use App\Modules\Flights\Models\Services;
 use App\Modules\Flights\Models\FlightOrders;
+use App\Modules\Flights\Helpers\FlightHelper;
+use App\Modules\News\Models\News;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Modules\Order\Models\Order;
+
 use App\Modules\Frontend\Controllers\FrontendController;
+use Illuminate\Support\Collection;
 use Auth;
 use DB;
+use Cache;
 use App\User;
 use Response;
 
 
 class FlightsFrontController extends FrontendController
 {
-    //Tìm kiếm chuyến bay
-    public $config = [
-        'url' => 'http://platform.datacom.vn/flights/search',
-        'HeaderUser' => 'datacom',
-        'HeaderPass' => 'dtc@19860312',
-        'ProductKey' => 'fhu95z5yn394ix8',
-        'Language' => 'vi',
-        'AgentAccount' => 'DC10961',
-        'AgentPassword' =>'kzx0q7fh',
-    ];
     public function search(){
         $currencies = Currencies::where('fiat', 1)->where('status',1)->get();
         $airline    = FlightAirlines::where('module','Flight')->where('status',1)->orderBy('name','ASC')->get();
         $services   = Services::where('module','Flight')->where('status',1)->get();
         return theme_view('flight.search',compact('airline','currencies','services'));
     }
+    public function search3(){
+        $date                  = Carbon::now()->addDays(7)->toDateString();
+        $DepartDate            = \DateTime::createFromFormat('Y-m-d',$date);
+        $Dep_Date              = $DepartDate->format('d-m-Y');
+        $DateDeparture         = $DepartDate->format('d/m/Y');
+        $type                  = 'EV-ND';
 
-    //danh sách tìm
-    public function list(Request $request){
-        if ($request->has('DepartDate') && $request->has('DepartDate2') && $request->DepartDate !== null && $request->DepartDate2 !== null) {
-            if (Carbon::parse($request->DepartDate)->gt(Carbon::parse($request->DepartDate2))) {
-                return redirect()->back()->withErrors(['error' => 'Thời gian khởi hành phải nhỏ hơn thời gian về']);
-            }
-        }
-        if($request->has('DepartDate2') && $request->DepartDate2 != null){
-            $data = array(
-                'Adt' => $request->Adt,
-                'Chd' => $request->Chd,
-                'Inf' => $request->Inf,
-                'ViewMode' => '',
-                'ListFlight'=> array( array(
-                    'StartPoint' => $request->StartPoint,
-                    'EndPoint' => $request->EndPoint,
-                    'DepartDate' => Carbon::parse($request->DepartDate)->format('dmY'),
-                    'Airline' => $request->Airline,
-                ),
-                    array(
-                        'StartPoint' => $request->EndPoint,
-                        'EndPoint' => $request->StartPoint,
-                        'DepartDate' => Carbon::parse($request->DepartDate2)->format('dmY'),
-                        'Airline' => $request->Airline,
-                    ),
-                ),
+        $input = array();
+        $input['StartPoint'] = 'HAN';
+        $input['EndPoint'] = 'SGN';
+        $input['DepartDate'] = $DateDeparture;
+        $input['DepartDate2'] = '';
+        $input['type'] = 0;
+        $input['Adt'] = 1;
+        $input['Chd'] = 0;
+        $input['Inf'] = 0;
+        $flight_data = FlightHelper::ApiEnViet($input);
 
-                'HeaderUser' => $this->config['HeaderUser'],
-                'HeaderPass' => $this->config['HeaderPass'],
-                'ProductKey' => $this->config['ProductKey'],
-                'Language' => $this->config['Language'],
-                'AgentAccount' => $this->config['AgentAccount'],
-                'AgentPassword' =>$this->config['AgentPassword'],
-            );
+
+        if($flight_data != null){
+            $convert = FlightHelper::convertData($flight_data,$type, $StartPoint = 'HAN', $EndPoin = 'SGN' , $Dep_Date, $Arr_Date = '');
+            $datas = collect($convert)->sortBy('SumPrice');
         }
         else{
-            $data = array(
-                'Adt' => $request->Adt,
-                'Chd' => $request->Chd,
-                'Inf' => $request->Inf,
-                'ViewMode' => '',
-                'ListFlight'=> array( array(
-                    'StartPoint' => $request->StartPoint,
-                    'EndPoint' => $request->EndPoint,
-                    'DepartDate' => Carbon::parse($request->DepartDate)->format('dmY'),
-                    'Airline' => $request->Airline,
-                ),
-                ),
-                'HeaderUser' => $this->config['HeaderUser'],
-                'HeaderPass' => $this->config['HeaderPass'],
-                'ProductKey' => $this->config['ProductKey'],
-                'Language' => $this->config['Language'],
-                'AgentAccount' => $this->config['AgentAccount'],
-                'AgentPassword' =>$this->config['AgentPassword'],
-            );
+            $datas   = [];
         }
-
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', $this->config['url'], [
-            'json' => $data
-        ]);
-        $stations = FlightStations::where('status',1)->get();
-        $airline = FlightAirlines::all();
-        $response = $response->getBody()->getContents();
-        $datas = json_decode($response, true);
-        $start = FlightStations::where('code',$request->StartPoint)->first();
-        $end = FlightStations::where('code',$request->EndPoint)->first();
-        $start_time = Carbon::parse($request->DepartDate)->format('d-m-Y');
-        if($request->DepartDate2 == null){
-            $end_time = null;
-        }
-        else{
-            $end_time = Carbon::parse($request->DepartDate2)->format('d-m-Y');
-        }
-        return theme_view('flight.list',compact('datas','start','end','stations','airline','start_time','end_time'));
+        $news        = News::where('status',1)->orderBy('publish_date','DESC')->limit(4)->get();
+        $stations    =  FlightStations::where('status',1)->get();
+        $currencies  = Currencies::where('fiat', 1)->where('status',1)->get();
+        $airline     = FlightAirlines::where('module','Flight')->where('status',1)->orderBy('name','ASC')->get();
+        $services    = Services::where('module','Flight')->where('status',1)->get();
+        return theme_view('flight.search3',compact('airline','currencies','services','datas','stations','airline','news'));
     }
+    public function search2(){
+        $currencies  = Currencies::where('fiat', 1)->where('status',1)->get();
+        $stations    = FlightStations::where('status',1)->where('featured',1)->get();
+        $airline     = FlightAirlines::where('module','Flight')->where('status',1)->orderBy('name','ASC')->get();
+        $services    = Services::where('module','Flight')->where('status',1)->get();
+        return theme_view('flight.search2',compact('airline','currencies','services','stations'));
+    }
+
+
 
     public function ajaxDeparture(Request $request)
     {
-        $station = FlightStations::where('search_tags', 'like', '%' . $request->get('searchTerm') . '%')->where('module','Flight')->orderBy('country_code','ASC')->limit(5)->get();
-        $data = [];
-        foreach ($station as $key => $item) {
-            {
-                $ivalue = [
-                    'text' => $item->city_vi.'-'.$item->country_vi.'('.$item->name.')',
-                    'id'   => $item->code
-                ];
-                $data[] = $ivalue;
+        $input = $request->get('searchTerm');
+        return FlightHelper::Departure($input);
+    }
+    public function ajaxArrival2(Request $request){
+        $stations = FlightStations::where('status',1)->where('featured',1)->where('code','!=',$request->code)->get();
+        if($stations){
+            $html = '';
+            $html .= "<option >Điểm đến</option>";
+            foreach ($stations as $value) {
+                $html .= "<option  value='" . $value['code'] . "') >" . $value['city_vi'].' ('.$value['name'].')' . "</option>";
+            }
+            return $html;
+        }
+    }
+    //danh sách tìm
+    public function list(Request $request){
+        if($request->type == 0){
+            $this->validate($request, [
+                'StartPoint' => 'required',
+                'EndPoint'   => 'required',
+                'DepartDate' => 'required',
+                'Adt'        => 'required|min:1',
+                'Chd'        => 'min:0',
+                'Inf'        => 'min:0',
+            ],
+                $messages = [
+                    'StartPoint.required' => 'Bạn cần chọn điểm khởi hành!',
+                    'EndPoint.required'   => 'Bạn cần chọn điểm đến!',
+                    'DepartDate.required' => 'Bạn cần chọn ngày về!',
+                    'Adt.required'        => 'Bạn cần nhập số người lớn!',
+                    'Inf.min'             => 'Số em bé phải là số dương!',
+                    'Inf.Chd'             => 'Số trẻ em phải là số dương!',
+                    'Adt.min'             => 'Số người lớn phải lớn hơn 1!',
+                ]);
+        }
+        else{
+            $this->validate($request, [
+                'StartPoint'  => 'required',
+                'EndPoint'    => 'required',
+                'DepartDate'  => 'required',
+                'DepartDate2' => 'required',
+                'Adt'         => 'required|min:1',
+                'Chd'         => 'min:0',
+                'Inf'         => 'min:0',
+            ],
+                $messages = [
+                    'StartPoint.required'   => 'Bạn cần chọn điểm khởi hành!',
+                    'EndPoint.required'     => 'Bạn cần chọn điểm đến!',
+                    'DepartDate2.required'  => 'Bạn cần chọn ngày khởi hành!',
+                    'DepartDate.required'   => 'Bạn cần chọn ngày về!',
+                    'Adt.required'          => 'Bạn cần nhập số người lớn!',
+                    'Inf.min'               => 'Số em bé phải là số dương!',
+                    'Inf.Chd'               => 'Số trẻ em phải là số dương!',
+                    'Adt.min'               => 'Số người lớn phải lớn hơn 1!',
+                ]
+            );
+
+        }
+        ini_set('max_execution_time', 3000);
+
+        $DepartDate      = \DateTime::createFromFormat('d/m/Y',$request->DepartDate);
+        $Dep_Date        = $DepartDate->format('d-m-Y');
+        if($request->has('DepartDate2') && $request->DepartDate2 != null){
+            $DepartDate2 = \DateTime::createFromFormat('d/m/Y',$request->DepartDate2);
+            $Arr_Date    = $DepartDate2->format('d-m-Y');
+        }
+        else{
+            $Arr_Date = null;
+        }
+        if ($request->has('DepartDate') && $request->has('DepartDate2') && $request->DepartDate !== null && $request->DepartDate2 !== null) {
+            if (Carbon::parse($Dep_Date)->gt(Carbon::parse($Arr_Date))) {
+                return redirect()->back()->withErrors(['error' => 'Thời gian khởi ngày đi phải nhỏ hơn thời gian ngày về!']);
             }
         }
-        return Response::json($data);
-    }
-    public function ajaxArrival(Request $request)
-    {
-        $station = FlightStations::where('search_tags', 'like', '%' . $request->get('searchTerm') . '%')->where('module','Flight')->orderBy('country_code','ASC')->where('status',1)->limit(5)->get();
-        $data = [];
-        foreach ($station as $key => $item) {
-            {
-                $ivalue = [
-                    'text' => $item->city_vi.'-'.$item->country_vi.'('.$item->name.')',
-                    'id'   => $item->code
-                ];
-                $data[] = $ivalue;
-            }
+        $input = $request->all();
+        $airline    = FlightAirlines::where('status',1)->get();
+        $Stations   =  FlightStations::where('status',1)->get();
+        $StartPoint = $request->StartPoint;
+        $EndPoint   = $request->EndPoint;
+        $start      = FlightStations::where('code', $request->StartPoint)->first();
+        $end        = FlightStations::where('code', $request->EndPoint)->first();
+        if ($start->country_code == 'VN' && $end->country_code == 'VN') {
+            $type  = 'EV-ND';
         }
-        return Response::json($data);
-    }
-    public function ajaxAirline(Request $request)
-    {
-        $airlines = FlightAirlines::where('search_tags', 'like', '%' . $request->get('searchTerm') . '%')->where('module','Flight')->where('status',1)->limit(5)->get();
-        $data = [];
-        foreach ($airlines as $key => $item) {
-            $ivalue = [
-                'text' => $item->name,
-                'id'   => $item->code
-            ];
-            $data[] = $ivalue;
+        else{
+            $type  = 'EV-QT';
         }
-        return Response::json($data);
+        $flight_data = FlightHelper::ApiEnViet($input);
+
+        if($flight_data != null){
+            $convert     = FlightHelper::convertData($flight_data,$type, $StartPoint, $EndPoint, $Dep_Date, $Arr_Date);
+            $datas       = collect($convert)->groupBy('RecordIndex');
+        }
+        else{
+            $datas = [];
+        }
+        return theme_view('flight.list',compact('datas','StartPoint','EndPoint','airline','Stations'));
     }
+
 
 
 }

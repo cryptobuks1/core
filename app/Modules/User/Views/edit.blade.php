@@ -79,7 +79,7 @@
                     @if(count($verify_documents) > 0)
                     <div class="form-group ">
                       @foreach($verify_documents as $document)
-                          <a href="{{asset($document->image)}}" target="_blank"><img src="{{asset($document->image)}}"></a>
+                          <a href="{{asset($document->image)}}" target="_blank"><img width="100px" src="{{asset($document->image)}}"></a>
                       @endforeach
                     </div>
                     @endif

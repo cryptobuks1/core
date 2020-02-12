@@ -120,7 +120,7 @@
             <div class="col-12">
                 @include('layouts.errors')
                 <div class="card">
-                                    {{--heheh--}}
+
                         <div class="col-md-12" style="padding: 10px 0px 10px 19px">
                             <div class="card-tools " style="float: left;position: relative;right: 0px;left: 0px;">
                                 <div class="input-group input-group-sm dataTables_filter" style="">

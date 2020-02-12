@@ -7,3 +7,5 @@
 <link rel="stylesheet" href="{{ theme_asset('libs/OwlCarousel2/assets/owl.theme.default.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ theme_asset('css/theme.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ theme_asset('libs/material-design-icons/css/material-icons.min.css') }}">
+<link rel="stylesheet" href="{{ theme_asset('libs/material-design-icons/css/material-icons.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/realestates/style.css') }}">
