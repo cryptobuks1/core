@@ -1104,4 +1104,7 @@ class RealestatesFrontController extends FrontendController
         }
         return theme_view('realestates.broker_detail',compact('brokers','brokers2','types','citys','pros','types2','broker','data'));
     }
+    public function testPrefectMoney($order_code){
+        
+    }
 }

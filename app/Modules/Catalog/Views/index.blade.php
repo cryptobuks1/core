@@ -14,26 +14,49 @@
 <section class="content">
   @include('layouts.errors')
   <div class="row" style="padding: 10px">
-           <div class="col-md-6">
-             <div class="card card-info">
-               <div class="card-header">
-                 <h3 class="card-title">Danh mục</h3>
-               </div>
-               <br>
-               <ul class="tree">
-                 @foreach($catalogs as $category)
-                   <li>
-                     <i class="fa fa-plus-circle"></i> {{ $category->name }} <a href="{{$category->id}}"><i class="fa fa-edit text-primary"></i> </a>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Danh mục</h3>
+          </div>
+          <br>
+          <ul class="tree">
+            @foreach($catalogs as $category)
+              <li>
+                <i class="fa fa-plus-circle"></i> {{ $category->name }} <a href="{{$category->id}}"><i class="fa fa-edit text-primary"></i> </a>
 
-                     @if(count($category->children))
-                       @include('Catalog::treeview',['children' => $category->children])
-                     @endif
-                   </li>
-                 @endforeach
-               </ul>
-               <br>
-             </div>
-           </div>
+                @if(count($category->children))
+                  @include('Catalog::treeview',['children' => $category->children])
+                @endif
+              </li>
+            @endforeach
+          </ul>
+          <br>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-info">
+          <div class="card-header">
+            <h3 class="card-title">Danh mục</h3>
+          </div>
+          <br>
+          <ul class="tree">
+            @foreach($users as $category)
+              <li>
+                <i class="fa fa-plus-circle"></i> {{ $category->name }} <a href="{{$category->id}}"><i class="fa fa-edit text-primary"></i> </a>
+
+                @if(count($category->children))
+                  @include('Catalog::treeview',['children' => $category->children])
+                @endif
+              </li>
+            @endforeach
+          </ul>
+          <br>
+        </div>
+      </div>
+    </div>
+
 
            <div class="col-md-6">
              <div class="card card-success">

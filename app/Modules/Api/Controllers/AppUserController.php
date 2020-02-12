@@ -5,7 +5,7 @@ namespace App\Modules\Api\Controllers;
 use App\Modules\Api\Models\Api;
 use App\Modules\Language\Models\Language;
 use App\Modules\Setting\Models\Setting;
-use App\Modules\User\Helpers\UserHelper;
+use App\Modules\User\Helpers\FlightHelper;
 use App\Modules\User\Models\User as UserModel;
 use App\Modules\Wallet\Models\Wallet;
 use Illuminate\Http\Request;
@@ -122,7 +122,7 @@ class AppUserController extends FrontendController
             $data['parent_id'] = 1;
             $data['ref'] = uniqid();
 
-            $result = UserHelper::createUser($data);
+            $result = FlightHelper::createUser($data);
             return $result;
         }
     }
@@ -145,7 +145,7 @@ class AppUserController extends FrontendController
             $data['username'] = $request->username;
             $data['password'] = $request->password;
             $data['remember'] = isset($request->remember) ? 1 : 0;
-            $result = UserHelper::user_login($data);
+            $result = FlightHelper::user_login($data);
 
             return $result;
         }
@@ -250,7 +250,7 @@ class AppUserController extends FrontendController
             return null;
         }
 
-        $allow_fields = UserHelper::UserUpdateCheck();
+        $allow_fields = FlightHelper::UserUpdateCheck();
         if(count($allow_fields) == 0){
             return null;
         }
@@ -376,7 +376,7 @@ class AppUserController extends FrontendController
             return $this->set_output(623);
         }
 
-        $name = UserHelper::getName($request->username);
+        $name = FlightHelper::getName($request->username);
         return $name;
     }
 

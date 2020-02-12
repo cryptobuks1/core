@@ -24,14 +24,16 @@
 <div class="card">
 
   <div class="card-header" style="border-bottom: 0">
-    <h3 class="card-title">Danh sách hãng bay</h3>
+      <div class="col-md-12">
+          <h3 class="card-title">Danh sách hãng bay</h3>
+      </div>
     <div class="float-right" style="margin-right: 150px">
       <a href="{{ url($backendUrl.'/flight/station/create') }}"><button class="btn btn-success"><i class="fa fa-plus-circle"></i> Thêm</button></a>
     </div>
     <div class="card-tools ">
       <div class="input-group input-group-sm dataTables_filter" style="width: 150px;">
         <form action="" name="formSearch" method="GET" >
-          <input type="text" name="keyword" class="form-control float-right" placeholder="Search" style="padding-right: 42px;">
+          <input type="text" name="keyword" class="form-control float-right" placeholder="Search" style="padding-right: 42px;" value = "@if(app("request")->input("keyword")){{ trim(app("request")->input("keyword"))}} @endif">
           <div class="input-group-append" style="margin-left: 110px">
             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
           </div>
@@ -39,6 +41,22 @@
       </div>
     </div>
   </div>
+    <div class="card-tools " style="float: left;position: relative;right: 0px;left: 0px;">
+        <div class="input-group input-group-sm dataTables_filter" style="">
+            <form action="" name="formSearch" method="GET" >
+                <div class="input-group">
+                    <select name="featured" class="form-control" style="">
+                        <option value="" @if(app("request")->input("featured")== "") selected="selected" @endif>-- Lọc theo featured --</option>
+                        <option value="1" @if(app("request")->input("featured")== 1) selected="selected" @endif>Featured</option>
+                        <option value="2" @if(app("request")->input("featured")== 2) selected="selected" @endif>Tất cả</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" name="submit" value="filter" class="btn btn-warning"><i class="fa fa-search"></i> Lọc</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
   <!-- /.card-header -->
   <form action="" method="POST">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -59,6 +77,7 @@
             <th>Quốc gia</th>
             <th>Thành phố</th>
             <th>Trạng thái</th>
+            <th>Featured</th>
             <th>Action</th>
         </tr>
       </thead>
@@ -75,19 +94,20 @@
           <td>{{$data->code}}</td>
           <td>@if($data->local == '1') Sân bay nội địa @else Sân bay quốc tế @endif</td>
           <td>
-              @foreach($countries as $item)
-                  @if($item->code == $data->country) {{$item->name}} @endif
-              @endforeach
+              {{$data->country_vi}}
           </td>
           <td>
-                  @foreach($cities as $city)
-                      @if($city->country_code == $data->country && $city->code == $data->city) {{$city->name_city}} @endif
-                  @endforeach
+              {{$data->city_vi}}
           </td>
           <td>
                <div data-table="flight_stations" data-id="{{ $data->id }}" data-col="status" class="Switch Round @if($data->status == 1) On @else Off @endif " style="vertical-align:top;margin-left:10px;">
                    <div class="Toggle" ></div>
                </div>
+          </td>
+          <td>
+            <div data-table="flight_stations" data-id="{{ $data->id }}" data-col="featured" class="Switch Round @if($data->featured == 1) On @else Off @endif " style="vertical-align:top;margin-left:10px;">
+              <div class="Toggle" ></div>
+            </div>
           </td>
             <td>
             <div class="action-buttons">

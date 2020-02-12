@@ -8,6 +8,7 @@ use App\Modules\Backend\Controllers\BackendController;
 
 use Auth;
 use DB;
+use GuzzleHttp;
 
 
 
@@ -124,7 +125,7 @@ class INetController extends BackendController
         }
     }
     public function convertUserdata($data){
-        if($data['type']=='registrant'){
+        if($data['type'] =='registrant'){
             $type='owner';
         }
         elseif($data['type']=='admin'){

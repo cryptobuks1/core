@@ -77,6 +77,7 @@
                    <div class="Toggle" ></div>
                </div>
             </td>
+
             <td>
             <div class="action-buttons">
              <a href="{{ url($backendUrl.'/flight/airline/edit/'.$data->id) }}"> <i title="Sửa" class="ace-icon fa fa-pencil bigger-130 btn btn-warning"></i> </a>  |

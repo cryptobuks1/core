@@ -37,7 +37,7 @@
             margin: auto;
             padding:5px;
             width: 100%;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);*/
             animation: float 5s infinite;
         }
         th {
@@ -67,44 +67,50 @@
             text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
         }
 
-        tr:first-child {
-            border-top:none;
-        }
-        tr:last-child {
-            border-bottom:none;
-        }
-        tr:nth-child(odd) td {
-            background:#EBEBEB;
-        }
 
-        tr:last-child td:first-child {
-            border-bottom-left-radius:3px;
-        }
-        tr:last-child td:last-child {
-            border-bottom-right-radius:3px;
-        }
         td {
-            padding: 3px;
             background:#FFFFFF;
             vertical-align:middle;
             text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-            border-right: 1px solid #C1C3D1;
+
         }
-        td:last-child {
-            border-right: 0px;
+        hr {
+            margin: 5px;
         }
-        th.text-left {
-            text-align: center;
+        .table-main .row{
+            margin-left: -10px;
+            padding-right: 0;
         }
-        td.text-left {
-            text-align: left;
+        .table-main .row .row{
+            padding-right: -10px;
         }
-        td.text-center {
-            text-align: center;
+        .chi-tiet,.name-airline,.img-airline{
+            flex-direction: column;
         }
-        td.text-right {
-            text-align: right;
+
+        .img-airline img{
+            max-width: 90%;
         }
+        .name-airline{
+            float: left;
+        }
+        @media (max-width: 991px) {
+            .img-airline{
+                max-width: 100%;
+                padding-top: 10px;
+                padding-left: 5px;
+                padding-right: 0;
+            }
+            .name-airline{
+                padding-left: 0;
+                padding-top: 10px;
+            }
+            .chi-tiet{
+                padding-top: 20px;
+
+            }
+        }
+
     </style>
 
 @endsection
@@ -117,7 +123,7 @@
                 @include('layouts.errors')
                 <div class="card">
                     <div class="card-header" style="border-bottom: 0">
-                        <h3 class="card-title" style="text-align: center; text-transform: uppercase; color: #0b6998">Danh sách chuyến bay</h3>
+                        <h2 class="card-title" style="text-align: center; text-transform: uppercase; color: #dc3545; font-size: 25px">Danh sách chuyến bay</h2>
                         <div class="card-tools ">
                             <div class="input-group input-group-sm dataTables_filter" style="width: 150px;">
                             </div>
@@ -127,133 +133,99 @@
                     <!-- /.card-header -->
                     <form action="" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="card-body" style="padding-top: 50px;">
-                            @if(count($datas['ListFareData']) > 0 )
-                                <div class="col-sm-12 ">
-                                    <div class="col-md-12" style="text-align: center; color: #e84e0f">
-                                        <h3>{{$start->city_vi}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{$end->city_vi}}</h3>
-                                        <h3>Đi ngày: {{$start_time}} @if($datas['Itinerary'] == 2)---- Về ngày: {{$end_time}} @endif</h3>
-                            </div>
-                                    <table id="example1" class=" table-fill table table-bordered table-striped dataTable" >
-                            <thead>
-                            <tr style="text-align: center">
-                                <th>Ngày bay</th>
-                                <th>Hành trình</th>
-                                <th>Hãng hàng không</th>
-                                <th>Giá cơ bản</th>
-                                <th>Tổng</th>
-                                <th>Chi tiết</th>
-                            </tr>
-                            </thead>
+                        <div class="card-body" style="padding-top: 10px">
+                            @if(count($datas) > 0 )
+                            <table id="example1" class=" table-fill table-responsive table table-striped dataTable" style=" background: #f1f1f1 none repeat scroll 0 0">
                             <tbody class="table-hover">
-                                @foreach($datas['ListFareData'] as $keyy => $data)
-                                        <tr data-toggle="collapse" data-target="{{'#'.$keyy}}" class="accordion-toggle">
-                                            <td style="">
-                                                <span style="background:none; color: inherit" class="badge">{{\Carbon\Carbon::parse($data['ListFlight'][0]['StartDate'])->format('d-m-Y H:i')}}</span>
-                                            </td>
-                                            <td>
-                                                @if($data['Leg'] == 0 && $data['Itinerary'] == 2 ) Đi và về
-                                                @elseif($data['Leg'] == 0 && $data['Itinerary'] == 1 ) Chiều đi
-                                                @else Chiều về @endif
-                                            </td>
-                                            <td>
-                                                @foreach($airline as $key => $item)
-                                                    @if($item->code == $data['Airline'])
-                                                        {{$item->name}}
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>{{number_format($data['FareAdt'],0).''.$data['Currency']}}</td>
-                                            <td><h5 class="red">{{number_format($data['TotalNetPrice'],0).''.$data['Currency']}}</h5></td>
-                                            <td style="text-align: center"><a link="{{ url($backendUrl.'/flight/checkin/'.$datas['Session'].'/'.$data['FareDataId'].'/'.$data['ListFlight'][0]['FlightValue']) }}" class="btn btn-primary"><i class="fa fa-asterisk" aria-hidden="true"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                        <td colspan="6"  class="hiddenRow"><div id="{{$keyy}}" class="accordian-body collapse"><div style="">
-                                                    @foreach($data['ListFlight'] as $key => $item)
-                                                        <div class="col-md-12">
+                            @foreach($datas as $keyy => $items)
+                                @if(count($items) > 0)
+                                    <tr class="table-main">
+                                        <td width="80%" style="  padding-left: 18px;">
+                                            @foreach($items as $i => $data)
+                                                <div style="width: 100%; padding-top: 10px;" >
+                                                    <div class="row" @if($data['Departure'] == $StartPoint) style="color: #0e84b5" @else style="color: #0c0c0c" @endif>
+                                                        <div class="col-md-7 col-xs-6" style="padding-right: 0">
                                                             <div class="row">
-                                                                <div class="col-md-8 col-xs-6" @if($data['Leg'] == 0 && ($key == 0)) style="color: palevioletred" @endif>
-                                                                    <div class="row">
-                                                                        <div class="col-md-5">@foreach($stations as $station) @if($item['StartPoint'] == $station->code)
-                                                                                {{$station->city_vi}}
-                                                                                ({{\Carbon\Carbon::parse($item['StartDate'])->format('d-m-Y H:i')}})<br>
-                                                                                {{$station->name}}
-                                                                            @endif @endforeach</div>
-                                                                        <div class="col-md-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
-                                                                        <div class="col-md-5">@foreach($stations as $station) @if($item['EndPoint'] == $station->code)
-                                                                                {{$station->city_vi}}
-                                                                                ({{\Carbon\Carbon::parse($item['EndDate'])->format('d-m-Y H:i')}})<br>
-                                                                                {{$station->name}}
-                                                                            @endif @endforeach</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2 col-xs-3">
-                                                                    <h5>@foreach($airline as $key => $air)
-                                                                            @if($air->code == $data['Airline'])
-                                                                                {{$air->name}}
-                                                                            @endif
-                                                                        @endforeach</h5>
-                                                                </div>
-                                                                <div class="col-md-2 col-xs-3">
-                                                                    <h6>Chuyến bay: {{$item['FlightNumber']}}</h6>
-                                                                </div>
+                                                                <div class="col-md-5" ><span> @foreach($Stations as $station) @if($station->code == $data['Departure']) {{$station->city_vi.' ('.$data['Departure'].')'}} <br> ({{$data['DepartureDate'].' '.$data['DepartureTime']}}) @endif @endforeach</span></div>
+                                                                <div class="col-md-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
+                                                                <div class="col-md-5"><span>@foreach($Stations as $station) @if($station->code == $data['Arrival']) {{$station->city_vi.' ('.$data['Arrival'].')'}} <br> ({{$data['ArrivalDate'].' '.$data['ArrivalTime']}}) @endif @endforeach</span></div>
                                                             </div>
                                                         </div>
-                                                    @endforeach
-                                                    <div class="col-md-12">
-                                                        <table>
-                                                            <thead>
-                                                            <tr>
-                                                                <th style=" padding: 0">Loại</th>
-                                                                <th style=" padding: 0">Số lượng</th>
-                                                                <th style=" padding: 0">Giá</th>
-                                                                <th style=" padding: 0">Thuế+Phí</th>
-                                                                <th style=" padding: 0">Tổng</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>Người lớn</td>
-                                                                <td  style="text-align: center">{{$data['Adt']}}</td>
-                                                                <td>{{number_format($data['FareAdt'],0).''.$data['Currency']}}</td>
-                                                                <td>{{number_format($data['FeeAdt'] + $data['TaxAdt'],0).''.$data['Currency']}}</td>
-                                                                <td>{{number_format($data['FareAdt'] + $data['FeeAdt'] + $data['TaxAdt'] + $data['ServiceFeeAdt'],0).''.$data['Currency']}}</td>
-                                                            </tr>
-                                                            @if($data['Chd'] > 0)
-                                                                <tr>
-                                                                    <td>Trẻ em</td>
-                                                                    <td style="text-align: center">{{$data['Chd']}}</td>
-                                                                    <td>{{number_format($data['FareChd'],0).''.$data['Currency']}}</td>
-                                                                    <td>{{number_format($data['FeeChd'] + $data['TaxChd'],0).''.$data['Currency']}}</td>
-                                                                    <td>{{number_format($data['FareChd'] + $data['FeeChd'] + $data['TaxChd'] + $data['ServiceFeeChd'],0).''.$data['Currency']}}</td>
-                                                                </tr>
-
-                                                            @endif
-                                                            @if($data['Inf'] > 0)
-                                                                <tr>
-                                                                    <td>Em bé</td>
-                                                                    <td style="text-align: center">{{$data['Inf']}}</td>
-                                                                    <td>{{number_format($data['FareInf'],0).''.$data['Currency']}}</td>
-                                                                    <td>{{number_format($data['FeeInf'] + $data['TaxInf'],0).''.$data['Currency']}}</td>
-                                                                    <td>{{number_format($data['FareInf'] + $data['FeeInf'] + $data['TaxInf'] + $data['ServiceFeeInf'],0).''.$data['Currency']}}</td>
-                                                                </tr>
-                                                            @endif
-                                                            <tr>
-                                                                <td colspan="2">Tổng tiền:</td>
-                                                                <td colspan="3"><h5 class="red">{{number_format($data['TotalNetPrice'],0).''.$data['Currency']}}</h5></td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        <div class="col-md-5 col-xs-6">
+                                                            <div class="col-md-6 col-xs-5 name-airline" >
+                                                                <span >{{$data['Airline']}}</span>
+                                                            </div>
+                                                            <div class="col-md-6 col-xs-7 img-airline">
+                                                                @if($data['Airline'] === '')
+                                                                    @dd($data['Airline'])
+                                                                @endif
+                                                                @foreach($airline as $item)
+                                                                    @if($item->name === trim($data['Airline']) || trim($item->name_en) === trim($data['Airline']) || $item->code === trim($data['Airline']))
+                                                                        <img src="@if($item->image){{ url('/storage/userfiles/images/airlines/'.$item->image) }}@endif" alt="{{$data['Airline']}}" style=" transform: translateY(-9px); max-height: 60px"/>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    @if(count($items) == 2 && $i < 1) <hr style="border-bottom: 1px solid white"> @endif
+                                                </div>
+                                            @endforeach
+                                        </td>
+                                        <td >
+                                            <div class="chi-tiet" style="text-align: center; padding-right: 5px;">
+                                                @if(count($items) == 1)
+                                                    <span class="red" style="font-size: 20px; font-weight: 600"> @if($items[0]['FlightType'] == 0) {{number_format($items[0]['SumPrice']).'VND'}}  @elseif($items[0]['FlightType'] == 1) {{number_format(round($items[0]['SumPrice']+500000)/212.35,0).'¥'}}@endif</span>
+                                                @elseif(count($items) > 1)
+                                                    <span class="red" style="font-size: 20px; font-weight: 600"> @if($items[0]['FlightType'] == 0) {{number_format($items[0]['SumPrice']).'VND'}}  @elseif($items[0]['FlightType'] == 1) {{number_format(round($items[0]['SumPrice']+1000000)/212.35,0).'¥'}}@endif</span>
+                                                @endif
+                                                    <div style="padding-top: 5px">
+                                                        <button  type="button" data-toggle="collapse" data-target="{{'#'.$keyy}}" class=" btn btn-primary accordion-toggle">Chi tiết</button>
+                                                    </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        <tr>
+                                        <td style="background-color: #f1f1f1" colspan="6"  class="hiddenRow"><div id="{{$keyy}}" class="accordian-body collapse"><div>
+                                            @foreach($items as  $data)
+                                                @if($data['FlightType'] == 1 && count($items) > 1)
+                                                    <div class="col-md-12" style="text-align: center">
+                                                            <h6 style="color: #dc3545; padding: 0">{{ $data['Departure'] }} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ $data['Arrival'] }}</h6>
+                                                    </div>
+                                                @endif
+                                                @foreach($data['Journeys'] as $key =>  $item)
+                                                    <div class="col-md-12" >
+                                                        <div class="row" >
+                                                            <div class="col-md-9 col-xs-9">
+                                                                <div class="row">
+                                                                    <div class="col-md-5" @if($data['TypeAir'] == 0 && $data['FlightType'] == 0) style="text-align: center" @endif>
+                                                                        {{$item['Departure']}}<br>
+                                                                        ({{$item['DepartureDate'].' '.$item['DepartureTime']}})
+                                                                    </div>
+                                                                    <div class="col-md-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
+                                                                    <div class="col-md-5" @if($data['TypeAir'] == 0 && $data['FlightType'] == 0) style="text-align: center" @endif>
+                                                                        {{$item['Arrival']}}<br>
+                                                                        ({{$item['ArrivalDate'].' '.$item['ArrivalTime']}})
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 col-xs-3">
+                                                                Mã chuyến bay: {{$item['FlightNumber']}}
+                                                            </div>
+                                                        </div>
+                                                        @if($data['TypeAir'] == 1 && $key < 1) <hr style="border-bottom: 1px solid white"> @endif
 
-                                                </div></div></td>
-                                        </tr>
-
-                                @endforeach
+                                                    </div>
+                                                @endforeach
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
                             </tbody>
                         </table>
-                                </div>
-                            @endif
+                        @else
+                            <h5>Không có chuyến bay nào, vui lòng chọn ngày khác</h5>
+                        @endif
 
                         </div>
                     </form>

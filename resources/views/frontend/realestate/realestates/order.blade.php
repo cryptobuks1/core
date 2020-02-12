@@ -174,6 +174,7 @@
                                 </table>
                                 <div class="form-group" style="padding-top: 10px; float: right">
                                     <a href="{{route('tin.rao')}}" class="btn btn-primary ">Về trang quản lý</a>
+                                    <a href="{{ asset('realestates/order/payment/'.$order->order_code)}}" class="btn btn-primary ">Test Thanh toán</a>
                                 </div>
                             </div>
                         </div>

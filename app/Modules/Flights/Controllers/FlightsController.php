@@ -245,10 +245,25 @@ class FlightsController extends BackendController
 
 
     //Flight Stations
-    public function indexStation(){
+    public function indexStation(Request $request){
         $countries = Countries::all();
         $cities    = Cities::all();
-        $datas     = FlightStations::where('module','Flight')->paginate(20);
+        if($request->has('keyword') && $request->keyword != null){
+            $datas = FlightStations::where('module','Flight')->where('search_tags','LIKE','%'.$request->keyword.'%')->orderBy('featured','DESC')->paginate(20);
+            return view('Flights::station_index',compact('datas','countries','cities'));
+        }
+        $datas = new FlightStations();
+        $datas = $datas->where('module','Flight');
+        if($request->has('featured') && $request->featured != null) {
+            if($request->featured == 1) {
+                $datas = $datas->where('featured',1);
+            }
+            else{
+                $datas = $datas->where('featured',0);
+            }
+        }
+
+        $datas = $datas->orderBy('featured','DESC')->paginate(20);
         return view('Flights::station_index',compact('datas','countries','cities'));
 
     }

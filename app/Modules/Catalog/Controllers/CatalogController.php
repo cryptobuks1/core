@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Auth;
 use App\Modules\Catalog\Models\Catalog;
+use App\Modules\User\Models\User as UserModel;
 
 class CatalogController extends BackendController
 {
@@ -30,8 +31,20 @@ class CatalogController extends BackendController
 
 	public function index(Request $request)
 	{
+//        $nodes = Catalog::get()->toTree();
+//
+//        $traverse = function ($categories, $prefix = '-') use (&$traverse) {
+//            foreach ($categories as $category) {
+//                echo PHP_EOL.$prefix.' '.$category->name.'<br>';
+//
+//                $traverse($category->children, $prefix.'-');
+//            }
+//        };
+//        $traverse($nodes);
+
 		$title    = "Quản lý Nested Catalog";
 		$catalogs = Catalog::where('lang', 'vi')->get()->toTree();
+        $users = UserModel::get()->toTree();
         $langs = Language::where('status', 1)->orderBy('default', 'DESC')->get();
         $cats = Catalog::where('id', '!=', 1)->get();
 
@@ -39,14 +52,13 @@ class CatalogController extends BackendController
          $nhaminh= Catalog::find(4);
          //$nhaminh->afterNode($hangxom)->save();
          $nhaminh->beforeNode($hangxom)->save();
-
-
-		return view("Catalog::index", compact('title','catalogs', 'langs', 'cats'));
+		return view("Catalog::index", compact('title','catalogs', 'langs', 'cats','users'));
 	}
 
 
 	public function create()
 	{
+
 		if(allow('create') === true)
         {
         	$title    = "Thêm catalog";
@@ -62,6 +74,8 @@ class CatalogController extends BackendController
 
 	public function store(Request $request)
     {
+
+
         $this->validate($request, [
             'name' => 'required',
             'parent_id' => 'required',
@@ -71,7 +85,6 @@ class CatalogController extends BackendController
 
         $input = $request->all();
         $parent = Catalog::find($request->parent_id);
-
         if(isset($input['status']))
         {
         	$input['status'] = 1;
@@ -90,7 +103,16 @@ class CatalogController extends BackendController
         }else{
             $input['featured'] = 0;
         }
-        Catalog::create($input, $parent);
+        $catalog = Catalog::create($input, $parent);
+        $nodes =Catalog::all();
+        $count = [];
+        foreach ($nodes as $node){
+            array_push($count,count($node->ancestors));
+        }
+        if($count+1 > 5){
+            Catalog::destroy($catalog->id);
+            return back()->withErrors('Không được tạo menu quá 4 tầng');
+        }
         return redirect()->route('catalogs.index')
                         ->with('success','catalog created successfully');
     }

@@ -23,4 +23,12 @@ use function GuzzleHttp\Psr7\str;
 
 class FlightsApi extends BackendController{
 
+    public function index(){
+
+
+        ///$client = "http://xml.enviet-group.com/servicebooking.asmx?wsdl";
+
+    }
+
 }
+

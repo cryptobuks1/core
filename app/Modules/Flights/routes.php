@@ -13,7 +13,8 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
         Route::PATCH('/edit/{id}',['as'=>'flight.update', 'uses'=> 'FlightsController@update'] );
         Route::delete('/delete/{id}',['as'=>'flight.delete', 'uses'=> 'FlightsController@delete'] );
 
-        Route::post('/search/',['as'=>'flight.list', 'uses'=> 'FlightsController@list'] );
+
+        Route::get('/search',['as'=>'flight.search', 'uses'=> 'FlightsController@search'] );
         Route::get('/search',['as'=>'flight.search', 'uses'=> 'FlightsController@search'] );
         Route::get('/checkin/{Session}/{FareDataId}/{FlightValue}',['as'=>'flight.get.checkin', 'uses'=> 'FlightsController@checkin'] );
         Route::post('/checkin/{id}',['as'=>'flight.post.checkin', 'uses'=> 'FlightsController@postCheckin'] );
@@ -64,9 +65,11 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
 
 
 Route::group(['middleware' => ['web'], 'module'=>'Flights', 'namespace' => $namespace], function () {
+    Route::get('/',['as'=>'front.flight.search3', 'uses'=> 'FlightsFrontController@search3'] );
     Route::group(['prefix'=>'flight'],  function () {
-        Route::post('/search/',['as'=>'front.flight.list', 'uses'=> 'FlightsFrontController@list'] );
-        Route::get('/search',['as'=>'front.flight.search', 'uses'=> 'FlightsFrontController@search'] );
+        Route::post('/list/',['as'=>'front.flight.list', 'uses'=> 'FlightsFrontController@list'] );
+//        Route::get('/search3',['as'=>'front.flight.search', 'uses'=> 'FlightsFrontController@search'] );
+//        Route::get('/search2',['as'=>'front.flight.search2', 'uses'=> 'FlightsFrontController@search2'] );
         Route::get('/checkin/{Session}/{FareDataId}/{FlightValue}',['as'=>'front.flight.get.checkin', 'uses'=> 'FlightsFrontController@checkin'] );
         Route::post('/checkin/{id}',['as'=>'front.flight.post.checkin', 'uses'=> 'FlightsFrontController@postCheckin'] );
 
@@ -76,5 +79,7 @@ Route::group(['middleware' => ['web'], 'module'=>'Flights', 'namespace' => $name
         Route::POST('/inventory/search/airline','FlightsFrontController@ajaxAirline')->name('ajax.flight.airline2');
         Route::POST('/inventory/search/departure','FlightsFrontController@ajaxDeparture')->name('ajax.flight.departure2');
         Route::POST('/inventory/search/arrival','FlightsFrontController@ajaxArrival')->name('ajax.flight.arrival2');
+        Route::POST('/inventory/search/arrival2','FlightsFrontController@ajaxArrival2')->name('ajax.front.arrival');
+        Route::GET('/api/test','FlightsApi@index');
     });
 });

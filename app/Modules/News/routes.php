@@ -16,7 +16,6 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
 
 //Frontend
 Route::group(['middleware' => $middleware, 'module'=>'News', 'namespace' => $namespace], function () {
-
     Route::get('tin-tuc', ['as'=>'frontend.news.index', 'uses'=>'NewsFrontController@index']);
     Route::get('tin-tuc/{news_slug}', ['as'=>'frontend.news.view', 'uses'=>'NewsFrontController@renderViewPage']);
 });

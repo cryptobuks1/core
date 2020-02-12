@@ -6,7 +6,7 @@ use App\Modules\Api\Models\Api;
 use App\Modules\Order\Helpers\OrderHelper;
 use App\Modules\Order\Models\Order;
 use App\Modules\Setting\Models\Setting;
-use App\Modules\User\Helpers\UserHelper;
+use App\Modules\User\Helpers\FlightHelper;
 use App\Modules\User\Models\User as UserModel;
 use App\Modules\Wallet\Models\Wallet;
 use App\Modules\Wallet\Models\WalletHistory;
@@ -108,7 +108,7 @@ class AppWalletController extends FrontendController
             return $this->set_output(626);
         }
 
-        $name = UserHelper::getName($request->username);
+        $name = FlightHelper::getName($request->username);
         if (!$name) {
             return $this->set_output(627);
         }

@@ -175,8 +175,9 @@
                                                 @else  <span style="color: gray; ">Chưa hoàn thành</span> @endif
                                             </td>
                                             <td>
-                                                <div class="action-buttons">
-                                                    <a href="#" name="{{$order->title}}" link="{{ asset('/realestates/order/delete/'.$order->id)}}" class="deleteClick red id-btn-dialog2"data-toggle="modal" data-target="#deleteModal" > <span class="btn btn-danger"><i title="Delete" class="ace-icon fa fa-trash-o bigger-130"></i></span></a>
+                                                <div class="action-buttons" style="display: flex">
+                                                    <a href="#" name="{{$order->title}}" link="{{ asset('/realestates/order/delete/'.$order->id)}}" class="deleteClick red id-btn-dialog2"data-toggle="modal" data-target="#deleteModal" > <span class="btn btn-danger"><i title="Delete" class="ace-icon fa fa-trash-o bigger-130"></i></span></a> |
+                                                    <a href="{{ asset('realestates/order/payment/'.$order->order_code)}}" class="btn btn-primary"><i class="fa fa-money" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
 

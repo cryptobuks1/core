@@ -28,6 +28,7 @@ class RealestatesController extends BackendController
      */
     public function index(Request $request)
     {
+
         $title='Thống kê tin đăng';
         $data= new Realestates;
         $data=$data->where('module','Realestates');

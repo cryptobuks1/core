@@ -51,15 +51,16 @@
                       <label for="gender">Gender:</label>
                       {!! Form::select('gender', array('male'=>'Male','female'=>'Female','unknown'=>'Unknown'),[], array('class' => 'form-control')) !!}
 
+                      
                     </div>
-
+                    
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="group">Group:</label>
                       {!! Form::select('group',$lsGroup,[], array('class' => 'form-control')) !!}
 
-
+                      
                     </div>
                     @hasrole('SUPER_ADMIN|ADMIN')
                         <div class="form-group ">
@@ -67,9 +68,9 @@
                           {!! Form::select('roles[]', $roles,[], array('class' => 'form-control select2','multiple')) !!}
                         </div>
                     @else
-
+                        
                     @endhasrole
-
+                    
 
                     <div class="form-group ">
                       <label for="password">Password: </label>

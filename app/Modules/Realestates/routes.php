@@ -47,6 +47,8 @@ Route::group(['middleware' =>['web','auth'],'module'=>'Realestates', 'namespace'
         Route::get('index/order/{order_code}', 'RealestatesFrontController@orderDetail')->name('tin.order');
         Route::get('listorder', 'RealestatesFrontController@listOrder')->name('tin.list.order');
         Route::delete('order/delete/{id}', 'RealestatesFrontController@deleteOrder')->name('tin.order.delete');
+
+        Route::get('order/payment/{order_code}', 'PerfectMoneyController@SetExpressCheckout')->name('tin.payment');
         //broker
         Route::group(['prefix'=>'broker'],function () {
             Route::get('create','RealestatesFrontController@createBroker');
@@ -122,9 +124,7 @@ Route::group(['prefix' => $as, 'middleware' => ['web','role:BACKEND'], 'module'=
         Route::get('edit/{id}','BrokerController@edit');
         Route::PATCH('edit/{id}','BrokerController@update')->name('broker.update');
         Route::delete('delete/{id}','BrokerController@destroy')->name('broker.delete');
-
     });
-
     });
 
 Route::group(['middleware' =>['web'],'module'=>'Realestates', 'namespace' => $namespace], function () {
